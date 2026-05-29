@@ -3,30 +3,36 @@
 ## Basic Usage
 
 ```bash
-# Always verify first before applying
+# Always verify first before applying.
 git apply --check patch_file.patch
 
-# Apply with verbose output for debugging
+# Apply with verbose output for debugging.
 git apply -v patch_file.patch
 
-# Stage without touching the worktree
+# Stage without touching the worktree.
 git apply --cached -v patch_file.patch
 
-# Apply a diff generated between refs
+# Apply a diff generated between refs.
 git diff main...HEAD -- <file> | git apply -v
 ```
 
-## Essential Flags
+`git apply` applies or stages changes without creating commits. `git am` applies
+patches with commit messages and author info preserved. Use `git apply -v` for
+this workflow to keep commit creation explicit and controlled.
+
+## Flags
 
 - `-v, --verbose`: always use this for detailed feedback during application.
-- `--check`: verify whether a patch can be applied cleanly without making changes.
+- `--check`: verify whether a patch can be applied cleanly without making
+  changes.
 - `--cached`: stage the patch without applying it to the worktree.
 - `--stat`: display affected files before applying.
 - `--whitespace=fix`: automatically correct trailing whitespace issues.
-- `--reject`: create `.rej` files for failed sections instead of aborting entirely.
+- `--reject`: create `.rej` files for failed sections instead of aborting
+  entirely.
 - `--reverse` / `-R`: revert a previously applied patch.
 
-## Troubleshooting Failed Applies
+## Troubleshooting
 
 Trailing whitespace:
 
@@ -52,10 +58,3 @@ Line ending issues:
 ```bash
 git apply --ignore-space-change -v patch_file.patch
 ```
-
-## Git Apply vs Git Am
-
-- `git apply`: applies or stages changes without creating commits.
-- `git am`: applies patches with commit messages and author info preserved.
-
-Use `git apply -v` for this workflow to keep commit creation explicit and controlled.

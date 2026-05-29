@@ -25,7 +25,7 @@ ccusage daily --all
 
 ## How Unified Views Work
 
-ccusage detects local usage files from Claude Code, Codex, OpenCode, Amp, and pi-agent. The same daily, weekly, monthly, and session views can run in two modes:
+ccusage detects local usage files from Claude Code, Codex, OpenCode, Amp, Droid, Codebuff, Hermes Agent, pi-agent, Goose, OpenClaw, Kilo, Kimi, Qwen, GitHub Copilot CLI, and Gemini CLI. The same daily, weekly, monthly, and session views can run in two modes:
 
 | Mode    | Command example        | What it shows                           |
 | ------- | ---------------------- | --------------------------------------- |
@@ -37,13 +37,23 @@ Unified tables include an **Agent** column so you can compare sources in one vie
 
 ## Supported Sources
 
-| Source      | Namespace  | Example focused view      |
-| ----------- | ---------- | ------------------------- |
-| Claude Code | `claude`   | `ccusage claude daily`    |
-| Codex       | `codex`    | `ccusage codex daily`     |
-| OpenCode    | `opencode` | `ccusage opencode weekly` |
-| Amp         | `amp`      | `ccusage amp session`     |
-| pi-agent    | `pi`       | `ccusage pi monthly`      |
+| Source       | Namespace  | Example focused view      |
+| ------------ | ---------- | ------------------------- |
+| Claude Code  | `claude`   | `ccusage claude daily`    |
+| Codex        | `codex`    | `ccusage codex daily`     |
+| OpenCode     | `opencode` | `ccusage opencode weekly` |
+| Amp          | `amp`      | `ccusage amp session`     |
+| Droid        | `droid`    | `ccusage droid daily`     |
+| Codebuff     | `codebuff` | `ccusage codebuff daily`  |
+| Hermes Agent | `hermes`   | `ccusage hermes daily`    |
+| pi-agent     | `pi`       | `ccusage pi monthly`      |
+| Goose        | `goose`    | `ccusage goose daily`     |
+| OpenClaw     | `openclaw` | `ccusage openclaw daily`  |
+| Kilo         | `kilo`     | `ccusage kilo daily`      |
+| Kimi         | `kimi`     | `ccusage kimi daily`      |
+| Qwen         | `qwen`     | `ccusage qwen daily`      |
+| Copilot CLI  | `copilot`  | `ccusage copilot daily`   |
+| Gemini CLI   | `gemini`   | `ccusage gemini daily`    |
 
 ## When to Focus a Source
 
@@ -54,7 +64,14 @@ ccusage codex daily --speed fast
 ccusage claude daily --mode display
 ccusage opencode session --json
 ccusage amp monthly --compact
+ccusage droid session
+ccusage codebuff daily
 ccusage pi session --pi-path /path/to/sessions
+ccusage openclaw daily --open-claw-path /path/to/openclaw
+ccusage kilo session
+ccusage qwen daily
+ccusage copilot daily --json
+ccusage gemini session --json
 ```
 
 ## Next Steps
@@ -64,3 +81,4 @@ ccusage pi session --pi-path /path/to/sessions
 - [Monthly Usage](/guide/monthly-reports) - Longer-term usage trends
 - [Session Usage](/guide/session-reports) - Per-conversation usage
 - [Data Sources](/guide/#data-sources) - Supported local data formats
+- [Source Support Q&A](/guide/source-support-qa) - Why some investigated CLIs are not supported

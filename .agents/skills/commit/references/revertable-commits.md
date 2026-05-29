@@ -1,6 +1,8 @@
 # Revertable Commit Examples
 
-## Good: split independent implementation steps
+## Independent Commits
+
+Good: split independent implementation steps.
 
 ```text
 feat(auth): add RefreshTokenService class
@@ -18,34 +20,42 @@ tokens. This can be reverted independently without removing the
 service itself.
 ```
 
-## Good: keep both sides of a move together
+## Move Commits
+
+Good: keep both sides of a move together.
 
 One commit contains:
 
-- `A .agents/skills/tdd/references/vitest-examples.md`
+- `A .agents/skills/tdd/references/vitest.md`
 - `M .agents/skills/tdd/SKILL.md`
 - `D .agents/skills/tdd/vitest-example.md`
 
-The commit is still small, but it is complete: the old path is removed, the new path is added, and every reference points to the new path.
+The commit is still small, but it is complete: the old path is removed, the new
+path is added, and every reference points to the new path.
 
-## Bad: split one move across incomplete commits
+Bad: split one move across incomplete commits.
 
 First commit:
 
-- `A .agents/skills/tdd/references/vitest-examples.md`
+- `A .agents/skills/tdd/references/vitest.md`
 
 Second commit:
 
 - `M .agents/skills/tdd/SKILL.md`
 - `D .agents/skills/tdd/vitest-example.md`
 
-The first commit is not independently revertable because it leaves duplicate or unreachable guidance until the second commit lands.
+The first commit is not independently revertable because it leaves duplicate or
+unreachable guidance until the second commit lands.
 
-## Good: one review comment per commit
+## Review Fix Commits
 
-If a reviewer says “run format before typecheck/test”, one commit can update only that workflow wording and the matching always-on reminder. Keep unrelated examples, source docs, and typo fixes for separate commits.
+Good: one review comment per commit.
 
-## Bad: tidy broad commit
+If a reviewer says "run format before typecheck/test", one commit can update
+only that workflow wording and the matching always-on reminder. Keep unrelated
+examples, source docs, and typo fixes for separate commits.
+
+Bad: tidy broad commit.
 
 Avoid a commit that mixes:
 
@@ -55,4 +65,5 @@ Avoid a commit that mixes:
 - Markdown fence formatting
 - Generated symlink sync
 
-Even if each change is correct, reverting one concern would revert unrelated work.
+Even if each change is correct, reverting one concern would revert unrelated
+work.

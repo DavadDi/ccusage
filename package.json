@@ -1,13 +1,40 @@
 {
 	"name": "ccusage-monorepo",
-	"type": "module",
-	"version": "19.0.3",
+	"version": "20.0.6",
 	"private": true,
 	"workspaces": [
 		"apps/*",
-		"docs"
+		"docs",
+		"packages/*"
 	],
-	"packageManager": "pnpm@11.1.1",
+	"type": "module",
+	"scripts": {
+		"build": "pnpm run --filter '*' build",
+		"docs:dev": "pnpm run --filter docs dev",
+		"format": "oxfmt --write .",
+		"preinstall": "npx only-allow pnpm",
+		"lint": "pnpm --no-bail --aggregate-output /^lint:/",
+		"lint:oxfmt": "oxfmt --check .",
+		"lint:oxlint": "oxlint .",
+		"lint:rust": "cargo clippy --manifest-path rust/Cargo.toml --workspace --all-targets -- -D warnings",
+		"prerelease": "pnpm run --filter '*' prerelease",
+		"release": "pnpm bumpp -r",
+		"postrelease": "git checkout ./**/package.json package.json",
+		"sync:rust-version": "cargo set-version --manifest-path rust/Cargo.toml --workspace \"$npm_package_version\"",
+		"test": "pnpm --parallel --aggregate-output /^test:parallel:/",
+		"test:parallel:rust": "pnpm run test:rust",
+		"test:parallel:vitest": "pnpm run test:vitest",
+		"test:rust": "cargo test --manifest-path rust/Cargo.toml --workspace",
+		"test:vitest": "TZ=UTC vitest run",
+		"typecheck": "pnpm run --filter '*' typecheck"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"bumpp": "catalog:release",
+		"changelogithub": "catalog:release",
+		"pkg-pr-new": "catalog:release",
+		"vitest": "catalog:testing"
+	},
 	"engines": {
 		"runtime": [
 			{
@@ -22,40 +49,5 @@
 			}
 		]
 	},
-	"scripts": {
-		"build": "pnpm run --filter '*' build",
-		"docs:dev": "pnpm run --filter docs dev",
-		"format": "pnpm --aggregate-output /^format:/",
-		"format:oxfmt": "oxfmt --write .",
-		"format:root": "pnpm run lint:root --fix",
-		"format:submodules": "pnpm --parallel -r --aggregate-output /^format/",
-		"preinstall": "npx only-allow pnpm",
-		"lint": "pnpm --no-bail --aggregate-output /^lint:/",
-		"lint:oxfmt": "oxfmt --check .",
-		"lint:root": "eslint --cache eslint.config.js .",
-		"lint:submodules": "pnpm --parallel -r --no-bail /^lint/",
-		"prepare": "pnpm run /^prepare:/",
-		"prepare:lefthook": "lefthook install",
-		"prerelease": "pnpm run --filter '*' prerelease",
-		"release": "pnpm bumpp -r",
-		"postrelease": "git checkout ./**/package.json package.json",
-		"sync:skills": "bun scripts/sync-skills.ts",
-		"sync:skills:check": "bun scripts/sync-skills.ts --check",
-		"test": "TZ=UTC vitest run",
-		"typecheck": "pnpm run --filter '*' typecheck"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@gunshi/docs": "catalog:llm-docs",
-		"@praha/byethrow-docs": "catalog:llm-docs",
-		"@ryoppippi/eslint-config": "catalog:lint",
-		"@typescript/native-preview": "catalog:types",
-		"bumpp": "catalog:release",
-		"changelogithub": "catalog:release",
-		"eslint": "catalog:lint",
-		"lefthook": "catalog:release",
-		"oxfmt": "catalog:lint",
-		"pkg-pr-new": "catalog:release",
-		"vitest": "catalog:testing"
-	}
+	"packageManager": "pnpm@11.1.1"
 }
